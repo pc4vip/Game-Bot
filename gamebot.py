@@ -1,6 +1,6 @@
 import numpy as np
 import cv2
-from PIL import ImageGrab as IG
+from PIL import ImageGrab
 from pynput.keyboard import Key, Controller
 
 # initializing the keyboard
@@ -10,15 +10,15 @@ keyboard = Controller()
 # To print the y and x value when the screen is clicked
 def on_mouse(event, x, y):
     if event == cv2.EVENT_LBUTTONDOWN:
-            print('x = %d, y = %d'%(x, y))
+            print('x = %d, y = %d' % (x, y))
 
 
 while True:
     # Grab a specific regain on the screen
-    img = IG.grab(bbox=(150,150,800,640))
+    img = ImageGrab.grab(bbox=(150, 150, 800, 640))
 
     # Grab a specific regain on the screen
-    px = IG.grab(bbox=(150,150,800,640)).load()
+    px = ImageGrab.grab(bbox=(150, 150, 800, 640)).load()
 
     # Using the np import and passing the image
     img_np = np.array(img)
@@ -86,10 +86,3 @@ while True:
         cv2.destroyAllWindows()
         # End the while loop
         break
-
-
-
-
-
-
-
