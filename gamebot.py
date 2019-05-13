@@ -8,8 +8,9 @@ keyboard = Controller()
 
 
 # To print the y and x value when the screen is clicked
-def on_mouse(event, x, y):
+def on_mouse(event,x,y,flags,param):
     if event == cv2.EVENT_LBUTTONDOWN:
+            print(flags, param)
             print('x = %d, y = %d' % (x, y))
 
 
