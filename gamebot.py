@@ -1,89 +1,172 @@
 import numpy as np
 import cv2
-from PIL import ImageGrab
 from pynput.keyboard import Key, Controller
+import mss
+import time
 
 # initializing the keyboard
 keyboard = Controller()
 
 
 # To print the y and x value when the screen is clicked
-def on_mouse(event,x,y,flags,param):
+def on_mouse(event, x, y, flags, param):
     if event == cv2.EVENT_LBUTTONDOWN:
             print(flags, param)
             print('x = %d, y = %d' % (x, y))
 
 
-while True:
-    # Grab a specific regain on the screen
-    img = ImageGrab.grab(bbox=(150, 150, 800, 640))
+with mss.mss() as sct:
+    # Part of the screen to capture
+    monitor = {'top': 150, 'left': 150, 'width': 800, 'height': 640}
 
-    # Grab a specific regain on the screen
-    px = ImageGrab.grab(bbox=(150, 150, 800, 640)).load()
+    while 'Screen capturing':
+        last_time = time.time()
 
-    # Using the np import and passing the image
-    img_np = np.array(img)
+        # Get raw pixels from the screen, save it to a Numpy array
+        img = np.array(sct.grab(monitor))
 
-    # TODO: Replace the pixel values with a Pixel range
+        # Using the np import and passing the image
+        img_np = np.array(img)
 
-    # Getting the values of specific pixels
-    color1 = px[318, 272]
-    color2 = px[320, 288]
-    color3 = px[314, 292]
-    color4 = px[323, 286]
-    color5 = px[317, 266]
+        # TODO: Replace the pixel values with a Pixel range
+        color0 = img[65, 65]
+        # Getting the values of specific pixels
+        color1 = img[315, 320]
+        color2 = img[305, 288]
+        color3 = img[315, 292]
+        color4 = img[310, 310]
+        color5 = img[300, 266]
 
-    color6 = px[310, 330]
-    color7 = px[312, 328]
-    color8 = px[314, 326]
-    color9 = px[316, 324]
-    color10 = px[318, 322]
+        color6 = img[254, 253]
+        color7 = img[255, 258]
+        color8 = img[256, 259]
+        color9 = img[270, 253]
+        color10 = img[277, 270]
 
-    color11 = px[320, 320]
-    color12 = px[281, 324]
-    color13 = px[324, 316]
-    color14 = px[280, 319]
-    color15 = px[328, 320]
+        color11 = img[320, 320]
+        color12 = img[281, 324]
+        color13 = img[324, 316]
+        color14 = img[280, 319]
+        color15 = img[328, 320]
 
-    color16 = px[210, 318]
-    color17 = px[214, 316]
-    color18 = px[334, 306]
-    color19 = px[336, 304]
-    color20 = px[338, 302]
+        color16 = img[210, 318]
+        color17 = img[214, 316]
+        color18 = img[334, 306]
+        color19 = img[336, 304]
+        color20 = img[338, 302]
 
-    color21 = px[330, 270]
-    color22 = px[332, 275]
-    color23 = px[334, 265]
-    color24 = px[336, 280]
-    color25 = px[338, 290]
+        color21 = img[330, 270]
+        color22 = img[332, 275]
+        color23 = img[334, 265]
+        color24 = img[336, 280]
+        color25 = img[338, 290]
 
-    # If statement to check the pixel color value
-    if color1 == (83, 83, 83)\
-       or color2 == (83, 83, 83)or color3 == (83, 83, 83)\
-       or color4 == (83, 83, 83)or color5 == (83, 83, 83)\
-       or color6 == (83, 83, 83)or color7 == (83, 83, 83)\
-       or color8 == (83, 83, 83) or color9 == (83, 83, 83)\
-       or color10 == (83, 83, 83)or color11 == (83, 83, 83)\
-       or color12 == (83, 83, 83)or color13 == (83, 83, 83)\
-       or color14 == (83, 83, 83)or color15 == (83, 83, 83)\
-       or color16 == (83, 83, 83)or color17 == (83, 83, 83)\
-       or color18 == (83, 83, 83)or color19 == (83, 83, 83)\
-       or color20 == (83, 83, 83)or color21 == (83, 83, 83)\
-       or color22 == (83, 83, 83)or color23 == (83, 83, 83)\
-       or color24 == (83, 83, 83)or color25 == (83, 83, 83):
-        # press and release key up
-        keyboard.press(Key.up)
-        keyboard.release(Key.up)
-    # End of the if statement
+        end = img[604, 260]
 
-    # Display the window on screen
-    cv2.imshow("images",  img_np)
+        #   print(end)
+        #
+        # print("start")
+        # print(color0)
+        # print(color1)
+        # print(color2)
+        # print(color3)
+        # print(color4)
+        # print(color5)
+        # print("end")
+        # if 43 in end:
+        #     print("##########################"
+        #       "##########################"
+        #       "##########################"
+        #       "##########################"
+        #       "##########################")
 
-    # Call the onMouse function when the window is clicked
-    cv2.setMouseCallback('images', on_mouse)
+        if 255 in color0:
 
-    # Close the window if letter q is pressed and destroy all windows
-    if cv2.waitKey(1) & 0xFF == ord('q'):
-        cv2.destroyAllWindows()
-        # End the while loop
-        break
+            # If statement to check the pixel color value
+            if 83 in color1:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 83 in color2:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 83 in color3:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 83 in color4:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 83 in color5:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 83 in color6 and 83 in color7 and 83 in color8:
+                # press and release key up
+                keyboard.press(Key.down)
+
+        if 0 in color0:
+
+            # If statement to check the pixel color value
+            if 255 in color1:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 255 in color2:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 255 in color3:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 255 in color4:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 255 in color5:
+                # press and release key up
+                keyboard.press(Key.up)
+                # End of the if statement
+
+            # If statement to check the pixel color value
+            if 255 in color6 and 83 in color7 and 83 in color8:
+                # press and release key up
+                keyboard.press(Key.down)
+
+        # Display the picture
+        cv2.imshow('images', img)
+
+        # Display the picture in grayscale
+        # cv2.imshow('OpenCV/Numpy grayscale',
+        # cv2.cvtColor(img, cv2.COLOR_BGRA2GRAY))
+
+        # print('fps: {0}'.format(1 / (time.time()-last_time)))
+
+        # Call the onMouse function when the window is clicked
+        cv2.setMouseCallback('images', on_mouse)
+
+        # Press "q" to quit
+        if cv2.waitKey(25) & 0xFF == ord('q'):
+            cv2.destroyAllWindows()
+            break
